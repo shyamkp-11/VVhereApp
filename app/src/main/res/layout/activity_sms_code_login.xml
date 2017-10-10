@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.vvconnect.android.vvhereapp.login.SmsCodeLogin">
+
+    <TextView
+        android:id="@+id/tv_entered_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:letterSpacing="0.2"
+        tools:text="+1 6306490512"
+        android:padding="5dp"/>
+
+    <Button
+        android:id="@+id/btn_edit_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/edit_phone_number"
+        android:background="@android:color/transparent"/>
+
+    <TextView
+        android:id="@+id/tv_info_sending_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/info_sending_sms"/>
+
+    <EditText
+        android:id="@+id/et_otp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:hint="@string/enter_otp"
+        android:padding="5dp" />
+
+    <Button
+        android:id="@+id/btn_resend_otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:text="@string/resend_code"
+        android:padding="5dp" />
+
+</LinearLayout>

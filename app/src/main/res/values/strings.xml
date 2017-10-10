@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">VVhereApp</string>
+
+    <!--Register Activity Layout-->
+    <string name="enter_user_phone_number">Enter your phone number</string>
+    <string name="register_next">next</string>
+
+    <!--SmsCodeLogin Activity layout-->
+    <string name="info_sending_sms">Got it! We have sent verification code on this number</string>
+    <string name="edit_phone_number">Edit phone number</string>
+    <string name="resend_code">Resend code</string>
+    <string name="enter_otp">Enter OTP</string>
+
+
+</resources>
