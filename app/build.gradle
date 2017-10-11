@@ -25,9 +25,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    // Country Code Selector Project uses minimum SDK 14
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    // Country Code Selector Project uses minimum SDK 14
     compile 'com.hbb20:ccp:2.0.5'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.5.+'
     testCompile 'junit:junit:4.12'
 }

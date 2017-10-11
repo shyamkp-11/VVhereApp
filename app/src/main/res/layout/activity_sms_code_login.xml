@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.vvconnect.android.vvhereapp.login.SmsCodeLogin">
+    tools:context="com.vvconnect.android.vvhereapp.login.SmsCodeLoginActivity">
 
     <TextView
         android:id="@+id/tv_entered_phone_number"
@@ -40,7 +40,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:hint="@string/enter_otp"
-        android:padding="5dp" />
+        android:padding="10dp"
+        android:maxLength="6"/>
 
     <Button
         android:id="@+id/btn_resend_otp"
@@ -51,4 +52,15 @@
         android:text="@string/resend_code"
         android:padding="5dp" />
 
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/text_continue"
+        android:textColor="@android:color/white" />
 </LinearLayout>

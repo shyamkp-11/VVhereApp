@@ -64,9 +64,9 @@ public class RegisterActivity extends AppCompatActivity implements Button.OnClic
             public void onValidityChanged(boolean isValidNumber) {
                 // your code
                 if(isValidNumber) {
-                    mBtnRegister.setVisibility(View.VISIBLE);
+                    mBtnRegister.setEnabled(true);
                 } else {
-                    mBtnRegister.setVisibility(View.INVISIBLE);
+                    mBtnRegister.setEnabled(false);
                 }
             }
         });
@@ -75,9 +75,9 @@ public class RegisterActivity extends AppCompatActivity implements Button.OnClic
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_register_next) {
-            Intent intentToStartLoginActivity = new Intent(RegisterActivity.this, SmsCodeLogin.class);
+            Intent intentToStartLoginActivity = new Intent(RegisterActivity.this, SmsCodeLoginActivity.class);
             String formattedFullNumber = mCountryCodePicker.getFormattedFullNumber();
-            intentToStartLoginActivity. putExtra(SmsCodeLogin.USER_PHONE_NUMBER, formattedFullNumber);
+            intentToStartLoginActivity. putExtra(SmsCodeLoginActivity.USER_PHONE_NUMBER, formattedFullNumber);
             startActivity(intentToStartLoginActivity);
         }
     }
