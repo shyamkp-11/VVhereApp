@@ -41,7 +41,9 @@
         android:gravity="center"
         android:hint="@string/enter_otp"
         android:padding="10dp"
-        android:maxLength="6"/>
+        android:maxLength="4"
+        android:inputType="number"
+        android:maxLines="1"/>
 
     <Button
         android:id="@+id/btn_resend_otp"

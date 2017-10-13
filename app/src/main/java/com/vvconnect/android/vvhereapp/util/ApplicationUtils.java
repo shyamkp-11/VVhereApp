@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -30,6 +31,8 @@ public class ApplicationUtils {
         if(UserPreferences.isUserProfileStored(context)) return true;
         else return false;
     }
+
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public static boolean checkFilePermission(final Context context) {
         int currentAPIVersion = Build.VERSION.SDK_INT;
@@ -56,50 +59,6 @@ public class ApplicationUtils {
                 else {
                     // ask for permission directly
                     ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-                }
-
-                return false;
-            } else {
-                // permission are already granted
-                return true;
-            }
-        } else {
-            // for lower android version return true as permissions are already asked in manifest.
-            return true;
-        }
-    }
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static boolean checkCameraPermission(final Context context) {
-        String[] permissionArray = {Manifest.permission.CAMERA};
-        int requestCode = PERMISSIONS_REQUEST_ACCESS_CAMERA;
-        String alertTitle = "Permission required";
-        String alertMessage = "Camera permission required to access Camera";
-        return genericPermissionChecker(context, permissionArray, requestCode, alertTitle, alertMessage);
-    }
-
-    private static boolean genericPermissionChecker(final Context context, final String [] permissionArray, final int requestCode, String alertTtile, String alertMessage) {
-        int currentAPIVersion = Build.VERSION.SDK_INT;
-        if(currentAPIVersion>=android.os.Build.VERSION_CODES.M)
-        {
-            if(ContextCompat.checkSelfPermission(context, permissionArray[0])
-                    != PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permissionArray[0])) {
-                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
-                    alertBuilder.setCancelable(true);
-                    alertBuilder.setTitle(alertTtile);
-                    alertBuilder.setMessage(alertMessage);
-                    alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions((Activity) context, permissionArray, requestCode);
-                        }
-                    });
-                    AlertDialog alert = alertBuilder.create();
-                    alert.show();
-                }
-                else {
-                    // ask for permission directly
-                    ActivityCompat.requestPermissions((Activity) context, permissionArray, requestCode);
                 }
 
                 return false;

@@ -13,7 +13,7 @@ public class UserProfile {
     private String phoneNumber;
     private @Nullable String profileImagePath;
 
-    public UserProfile(String firstName, String lastName, @Nullable String profileImagePath, String phoneNumber) {
+    public UserProfile(String firstName, String lastName, String phoneNumber, @Nullable String profileImagePath) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.profileImagePath = profileImagePath;

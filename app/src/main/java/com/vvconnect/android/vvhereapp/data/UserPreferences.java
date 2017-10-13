@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.vvconnect.android.vvhereapp.model.UserProfile;
 import com.vvconnect.android.vvhereapp.util.TextUtil;
@@ -31,7 +32,7 @@ public final class UserPreferences {
      * @param phoneNumber authenticated phone number of user
      * @param firstName first name of user
      * @param lastName last name of user
-     * @param profileImagePath image path of prifile image. Null can be used if no change.
+     * @param profileImagePath (currently directoy)image path of prifile image. Null can be used if no change.
      */
     public static void setUserProfile(Context context, String phoneNumber, String firstName, String lastName, @Nullable String profileImagePath) {
 
@@ -92,11 +93,11 @@ public final class UserPreferences {
         String phoneNumber = sp.getString(PREF_USER_PHONE_NUMBER, null);
         String firstName = sp.getString(PREF_USER_FIRST_NAME, null);
         String lastName = sp.getString(PREF_USER_LAST_NAME, null);
-        String profilePicture = sp.getString(PREF_USER_PROFILE_IMAGE_PATH, null);
+        String profilePicturePath = sp.getString(PREF_USER_PROFILE_IMAGE_PATH, null);
         if(TextUtils.isEmpty(phoneNumber)|| TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)) {
             return null;
         }
-        UserProfile userProfile = new UserProfile(phoneNumber, firstName, lastName, profilePicture);
+        UserProfile userProfile = new UserProfile(firstName, lastName, phoneNumber, profilePicturePath);
         return userProfile;
     }
 
@@ -127,4 +128,5 @@ public final class UserPreferences {
         boolean isUserProfileStored = !TextUtils.isEmpty(firstName);
         return isUserProfileStored;
     }
+
 }
