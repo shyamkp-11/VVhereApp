@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,11 +22,11 @@ import com.vvconnect.android.vvhereapp.util.ApplicationUtils;
 import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import timber.log.Timber;
 
 
 public class InitialUserProfileActivity extends AppCompatActivity implements Button.OnClickListener{
 
-    private static final String TAG = InitialUserProfileActivity.class.getSimpleName();
     public static final String PROFILE_PIC_FILE_NAME = "profile_pic.jpg";
     private static final String IMAGE_DIR_NAME = "imageDir";
     String mProfilePicPath = null;
@@ -53,8 +52,6 @@ public class InitialUserProfileActivity extends AppCompatActivity implements But
         mBtnFinish.setOnClickListener(this);
         mImageViewProfilePic.setOnClickListener(this);
 
-
-
     }
 
     @Override
@@ -78,7 +75,7 @@ public class InitialUserProfileActivity extends AppCompatActivity implements But
                         .setScaleType(CropImageView.ScaleType.FIT_CENTER)
                         .setFixAspectRatio(true)
                         .setAspectRatio(1, 1)
-                        .setOutputUri(getProfilePicFileUri())
+                        .setOutputUri(getProfilePicFileUri(IMAGE_DIR_NAME, PROFILE_PIC_FILE_NAME))
                         .start(this);
                 break;
         }
@@ -133,7 +130,7 @@ public class InitialUserProfileActivity extends AppCompatActivity implements But
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "onActivityResult Permission +" + requestCode+ " "+resultCode);
+        Timber.d("onActivityResult Permission +" + requestCode+ " "+resultCode);
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -142,6 +139,7 @@ public class InitialUserProfileActivity extends AppCompatActivity implements But
                 mImageViewProfilePic.setImageURI(resultUri);
                 Toast.makeText(getApplicationContext(),resultUri.getPath(),Toast.LENGTH_LONG).show();
                 mProfilePicPath = resultUri.getPath();
+                profilePictureSelected();
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
@@ -150,7 +148,7 @@ public class InitialUserProfileActivity extends AppCompatActivity implements But
     }
 
     /**
-     * show the edit image textview
+     * hide upload message. and optionally show edit image textview.
      */
     private void profilePictureSelected() {
         mTextViewEditProfilePic.setVisibility(View.VISIBLE);
@@ -162,12 +160,12 @@ public class InitialUserProfileActivity extends AppCompatActivity implements But
      *
      * @return the uri of the file to save the image
      */
-    private Uri getProfilePicFileUri() {
+    private Uri getProfilePicFileUri(String dirName, String fileName) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/VVhereApp/app_data/imageDir
-        File directory = cw.getDir(IMAGE_DIR_NAME, Context.MODE_PRIVATE);
+        File directory = cw.getDir(dirName, Context.MODE_PRIVATE);
         // Create imageDir
-        File mypath=new File(directory, PROFILE_PIC_FILE_NAME);
+        File mypath=new File(directory, fileName);
 
         return Uri.fromFile(mypath);
     }

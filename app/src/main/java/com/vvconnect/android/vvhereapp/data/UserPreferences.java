@@ -28,19 +28,19 @@ public final class UserPreferences {
      * Helper method to handle setting user profile details in Preferences (first name, last name,
      * profile picture)
      *
-     * @param context Context used to get the SharedPreferences
-     * @param phoneNumber authenticated phone number of user
-     * @param firstName first name of user
-     * @param lastName last name of user
+     * @param context          Context used to get the SharedPreferences
+     * @param phoneNumber      authenticated phone number of user
+     * @param firstName        first name of user
+     * @param lastName         last name of user
      * @param profileImagePath (currently directoy)image path of prifile image. Null can be used if no change.
      */
     public static void setUserProfile(Context context, String phoneNumber, String firstName, String lastName, @Nullable String profileImagePath) {
 
-        if(TextUtils.isEmpty(firstName)) {
+        if (TextUtils.isEmpty(firstName)) {
             throw new InvalidParameterException("First Name cannot be empty");
-        } else if(TextUtils.isEmpty(lastName)) {
+        } else if (TextUtils.isEmpty(lastName)) {
             throw new InvalidParameterException("Last Name cannot be empty");
-        } else if(TextUtils.isEmpty(phoneNumber)) {
+        } else if (TextUtils.isEmpty(phoneNumber)) {
             throw new InvalidParameterException("Phone Name cannot be empty");
         }
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -49,7 +49,7 @@ public final class UserPreferences {
         editor.putString(PREF_USER_FIRST_NAME, firstName);
         editor.putString(PREF_USER_LAST_NAME, lastName);
         editor.putString(PREF_USER_PHONE_NUMBER, phoneNumber);
-        if(!TextUtils.isEmpty(profileImagePath)) {
+        if (!TextUtils.isEmpty(profileImagePath)) {
             editor.putString(PREF_USER_PROFILE_IMAGE_PATH, profileImagePath);
         }
         editor.apply();
@@ -58,11 +58,11 @@ public final class UserPreferences {
     /**
      * Set the user phone number. Purpose is to store phone number when number is authenticated.
      *
-     * @param context  Context used to get the SharedPreferences
+     * @param context     Context used to get the SharedPreferences
      * @param phoneNumber not empty phone number string
      */
     public static void setUserPhoneNumber(Context context, String phoneNumber) {
-        if(TextUtils.isEmpty(phoneNumber)) {
+        if (TextUtils.isEmpty(phoneNumber)) {
             throw new InvalidParameterException("Phone Name cannot be empty");
         }
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -73,10 +73,13 @@ public final class UserPreferences {
 
     /**
      * get users phone
-     * @param context  Context used to get the SharedPreferences
+     *
+     * @param context Context used to get the SharedPreferences
      * @return Nullable user phone number.
      */
-    public static @Nullable String getUserPhoneNumber(Context context) {
+    public static
+    @Nullable
+    String getUserPhoneNumber(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         String phoneNumber = sp.getString(PREF_USER_PHONE_NUMBER, null);
         return phoneNumber;
@@ -88,13 +91,15 @@ public final class UserPreferences {
      * @param context
      * @return UserProfile object or null if Shared Preferences are not set.
      */
-    public static @Nullable UserProfile getUserProfile (Context context) {
+    public static
+    @Nullable
+    UserProfile getUserProfile(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         String phoneNumber = sp.getString(PREF_USER_PHONE_NUMBER, null);
         String firstName = sp.getString(PREF_USER_FIRST_NAME, null);
         String lastName = sp.getString(PREF_USER_LAST_NAME, null);
         String profilePicturePath = sp.getString(PREF_USER_PROFILE_IMAGE_PATH, null);
-        if(TextUtils.isEmpty(phoneNumber)|| TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)) {
+        if (TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)) {
             return null;
         }
         UserProfile userProfile = new UserProfile(firstName, lastName, phoneNumber, profilePicturePath);

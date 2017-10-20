@@ -26,8 +26,6 @@ import com.vvconnect.android.vvhereapp.util.TextUtil;
 public class SmsCodeLoginActivity extends AppCompatActivity implements Button.OnClickListener {
 
     public static final String USER_PHONE_NUMBER = "USER_PHONE_NUMBER";
-    private static final String USER_COUNTRY_CODE = "USER_COUNTRY_CODE";
-    private static final String TAG = SmsCodeLoginActivity.class.getSimpleName();
 
 //    EditText mEditTextOtp;
     PinEntryEditText mPinEntryEditText;
@@ -42,6 +40,8 @@ public class SmsCodeLoginActivity extends AppCompatActivity implements Button.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_code_login);
 
+        //TODO remove this when sms functionlity is implemented
+        Toast.makeText(getApplicationContext(), "Enter 1234 to continue", Toast.LENGTH_LONG).show();
 
         mBtnResendOtp = (Button) findViewById(R.id.btn_resend_otp);
         mBtnResendOtp.setOnClickListener(this);
@@ -57,38 +57,22 @@ public class SmsCodeLoginActivity extends AppCompatActivity implements Button.On
         Intent intentThatStartedThisActivity = getIntent();
         if (!intentThatStartedThisActivity.hasExtra(USER_PHONE_NUMBER)) {
             finish();
-        }
-        else {
+        } else {
             phoneNumber = intentThatStartedThisActivity.getStringExtra(USER_PHONE_NUMBER);
             // set the title string
             String outputString = getResources().getString(R.string.verify_phone, phoneNumber);
             mTextViewVerifyNumber.setText(outputString);
             // set message string
             String messageString = getResources().getString(R.string.message_wrong_number, phoneNumber);
-            // make the Wrong number substring clickable..
             CharSequence styledString = TextUtil.fromHtml(messageString);
-            SpannableString ss = new SpannableString(styledString);
-            ClickableSpan clickableSpan = new ClickableSpan() {
-                @Override
-                public void onClick(View textView) {
-                    // go back
-                    finish();
-                }
 
-                @Override
-                public void updateDrawState(TextPaint ds) {
-                    super.updateDrawState(ds);
-                    ds.setUnderlineText(false);
-                }
-            };
-            int startIndex = styledString.toString().indexOf("Wrong number?");
-            if (startIndex != -1) {
-                ss.setSpan(clickableSpan, startIndex, startIndex + 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
+            // make the Wrong number substring clickable..
+            SpannableString ss = getClickableSpannableString(styledString.toString(), getString(R.string.wrong_number_clickable_text));
             mTextViewMessageWrongNumber.setText(ss);
             mTextViewMessageWrongNumber.setMovementMethod(LinkMovementMethod.getInstance());
         }
-        //
+
+        // Listen to the pin entered event
         if (mPinEntryEditText != null) {
             mPinEntryEditText.setOnPinEnteredListener(new PinEntryEditText.OnPinEnteredListener() {
                 @Override
@@ -109,6 +93,7 @@ public class SmsCodeLoginActivity extends AppCompatActivity implements Button.On
         int id = v.getId();
         switch (id) {
             case R.id.btn_resend_otp:
+                // TODO implement Resend SMS
                 break;
         }
     }
@@ -120,5 +105,43 @@ public class SmsCodeLoginActivity extends AppCompatActivity implements Button.On
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    /**
+     * Method to make string clickable. Also handles the click callback methods
+     * @param string
+     * @param subsString
+     * @return spannable String with the clickable substring
+     */
+    private SpannableString getClickableSpannableString(String string, String subsString) {
+
+        SpannableString ss = new SpannableString(string);
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                // go back
+                finish();
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        };
+        String textToLinkify = subsString;
+        if(!string.contains(textToLinkify)) {
+            try {
+                throw new Exception("Parent String doesn't contain child String to linkify");
+            } catch (Exception e) {
+                e.printStackTrace();
+                finish();
+            }
+        }
+        int startIndex = string.indexOf(textToLinkify);
+        if (startIndex != -1) {
+            ss.setSpan(clickableSpan, startIndex, startIndex + textToLinkify.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return ss;
     }
 }

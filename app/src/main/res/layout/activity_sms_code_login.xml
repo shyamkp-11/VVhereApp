@@ -4,46 +4,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:orientation="vertical"
     tools:context="com.vvconnect.android.vvhereapp.login.SmsCodeLoginActivity">
 
+    <!--<TextView-->
+    <!--android:id="@+id/tv_entered_phone_number"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="30sp"-->
+    <!--android:gravity="center"-->
+    <!--android:letterSpacing="0.2"-->
+    <!--tools:text="+1 6306490512"-->
+    <!--android:padding="5dp"/>-->
     <TextView
-        android:id="@+id/tv_entered_phone_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:letterSpacing="0.2"
-        tools:text="+1 6306490512"
-        android:padding="5dp"/>
-
-    <Button
-        android:id="@+id/btn_edit_phone_number"
+        android:id="@+id/tv_verify_number"
+        style="@style/RegisterationTitleTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/edit_phone_number"
-        android:background="@android:color/transparent"/>
+        android:layout_marginTop="30dp"
+        tools:text="Verify +1 6306490512" />
 
     <TextView
-        android:id="@+id/tv_info_sending_message"
+        android:id="@+id/tv_message_wrong_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="@string/info_sending_sms"/>
-
-    <EditText
-        android:id="@+id/et_otp"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:hint="@string/enter_otp"
-        android:padding="10dp"
-        android:maxLength="4"
+        android:text="@string/message_wrong_number"
+        android:textColorHighlight="@android:color/transparent"/>
+
+    <!--<EditText-->
+        <!--android:id="@+id/et_otp"-->
+        <!--android:layout_width="110dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:hint="@string/enter_otp"-->
+        <!--android:inputType="number"-->
+        <!--android:maxLength="4"-->
+        <!--android:maxLines="1"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:paddingRight="10dp"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:letterSpacing="0.7"-->
+        <!--android:background="@null"-->
+        <!--android:layout_marginTop="30dp" />-->
+
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:id="@+id/pet_pin_entry"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:cursorVisible="false"
+        android:digits="1234567890"
         android:inputType="number"
-        android:maxLines="1"/>
+        android:maxLength="4"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        />
+
+    <!--<ImageView-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="@color/colorPrimaryLight"-->
+        <!--/>-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter 4-digit code"
+        android:textColor="@android:color/secondary_text_dark"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/btn_resend_otp"
@@ -51,18 +88,22 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
+        android:textColor="@android:color/tertiary_text_dark"
+        android:layout_marginTop="40dp"
         android:text="@string/resend_code"
-        android:padding="5dp" />
+        android:drawableLeft="@drawable/ic_sms_bubble_speech"
+        android:drawablePadding="8dp"
+        android:textAllCaps="false"/>
 
-    <Button
-        android:id="@+id/btn_continue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/text_continue"
-        android:textColor="@android:color/white" />
+    <!--<Button-->
+        <!--android:id="@+id/btn_continue"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="10dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:text="@string/text_continue"-->
+        <!--android:textColor="@android:color/white" />-->
 </LinearLayout>

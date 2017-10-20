@@ -1,22 +1,38 @@
 <resources>
     <string name="app_name">VVhereApp</string>
 
+
+    <!--Navigation View String Values-->
+    <string name="home">Home</string>
+    <string name="notification">Notification</string>
+    <string name="share">Share App</string>
+    <string name="settings">Settings</string>
+    <string name="help">Help</string>
+    <string name="others">Others</string>
+
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+
     <!--Register Activity Layout-->
     <string name="welcome_message">Welcome to</string>
-    <string name="enter_user_phone_number">We require your phone number to sign in</string>
-    <string name="register_next">Send confirmation SMS</string>
+    <string name="enter_user_phone_number">We will send an SMS message to verify your phone number. Select your country and enter phone number.</string>
+    <string name="register_next">Verify</string>
+    <string name="verify_your_phone_number">Verify your phone number</string>
 
     <!--SmsCodeLogin Activity layout-->
-    <string name="info_sending_sms">Got it! We have sent verification code on this number</string>
-    <string name="edit_phone_number">Edit phone number</string>
-    <string name="resend_code">Resend code</string>
-    <string name="enter_otp">Enter OTP</string>
+    <string name="verify_phone">Verify %1$s</string>
+    <!--Editing below string may require modification in code..-->
+    <string name="message_wrong_number">Waiting to automatically detect an SMS sent to &lt;b>%1$s&lt;/b>. Wrong number?</string>
+    <!--clickable text below must be part of message text above-->
+    <string name="wrong_number_clickable_text">Wrong number?</string>
+    <string name="resend_code">Resend SMS</string>
+    <string name="enter_otp">----</string>
 
     <!--InitialUserProfile Activity Layout-->
     <string name="last_name">Last name</string>
     <string name="first_name">First name</string>
     <string name="upload_optional_profile_picture">Upload optional profile picture</string>
     <string name="u2713_done">✓ Done</string>
-    <string name="text_continue">Continue</string>
+
 
 </resources>

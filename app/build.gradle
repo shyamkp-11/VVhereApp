@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.vvconnect.android.vvhereapp"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
     }
     buildTypes {
         release {
@@ -20,18 +21,23 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     // Country Code Selector Project uses minimum SDK 14
     // image cropper
     // circule image view
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    // pin input edit text
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.hbb20:ccp:2.0.5'
     compile 'com.theartofdev.edmodo:android-image-cropper:2.5.+'
     compile 'de.hdodenhof:circleimageview:2.2.0'
+    compile 'com.alimuzaffar.lib:pinentryedittext:1.3.1'
+    compile 'com.jakewharton.timber:timber:4.5.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.google.android.gms:play-services-maps:11.4.2'
+
 }
